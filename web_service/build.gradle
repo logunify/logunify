@@ -1,0 +1,29 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+}
+
+dependencies {
+    implementation project(":common")
+    implementation project(":integrations")
+    implementation project(":codegen")
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    compileOnly "org.springframework.boot:spring-boot-devtools"
+}
+
+application {
+    mainClassName = "com.logunify.LogunifyServiceApplication"
+}
+
+bootRun {
+    args = ["--spring.config.location=classpath:/applications.properties,../config/config.properties"]
+}
+
+jar {
+    enabled = true
+}
