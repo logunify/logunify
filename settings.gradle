@@ -1,0 +1,5 @@
+rootProject.name = 'logunify'
+include 'codegen'
+include 'web_service'
+include 'common'
+include 'integrations'

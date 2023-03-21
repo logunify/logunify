@@ -1,0 +1,21 @@
+extension {{className}}: LogUnify.Event {
+  func getSchemaName() -> String {
+    return "{{className}}"
+  }
+
+  func getProjectName() -> String {
+     return "{{projectName}}"
+  }
+
+  func serialize() throws -> Data {
+    return try self.serializedData()
+  }
+
+  func log() {
+    do {
+      try UnifyLogger.getInstance().logEvent(self)
+    } catch let err {
+      NSLog("Failed to log to backend due to error: \(err)")
+    }
+  }
+}

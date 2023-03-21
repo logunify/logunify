@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'io.freefair.lombok' version '6.5.0.3'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+allprojects {
+    group 'com.logunify'
+    version '1.0.0-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'application'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    ext {
+        protobufVersion = '3.21.4'
+        protocVersion = protobufVersion
+        junitJupiterVersion = '5.8.1'
+    }
+
+    repositories {
+        mavenCentral()
+        repositories {
+            mavenCentral()
+            maven {
+                url = uri("https://maven.pkg.github.com/dyang415/protoc-plugin")
+                credentials {
+                    username = "dyang415"
+                    password = "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"
+                }
+            }
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    targetCompatibility = 11
+
+    tasks.withType(JavaCompile) {
+        options.release = 11
+    }
+
+    dependencies {
+        implementation "com.google.protobuf:protobuf-java:${protobufVersion}"
+        implementation "com.google.protobuf:protoc:${protocVersion}"
+        implementation 'org.slf4j:slf4j-api:1.7.36'
+        implementation 'ch.qos.logback:logback-classic:1.2.11'
+        implementation "com.google.guava:guava:31.1-jre"
+
+        testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
+    }
+}
