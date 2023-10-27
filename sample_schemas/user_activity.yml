@@ -1,0 +1,56 @@
+projectName: TestProject
+schema:
+  name: UserActivity
+  description: Table for user activity.
+  enums:
+    - name: Event
+      values:
+        - IMPRESSION
+        - CLICK
+    - name: Surface
+      values:
+        - SCREEN_1
+        - SCREEN_2
+        - TOP_NAV
+        - OPTIONS_MENU
+        - BOTTOM_FAB
+    - name: ButtonType
+      values:
+        - NEXT
+        - PREVIOUS
+        - FAB
+        - OPTIONS
+        - SETTINGS
+  fields:
+    - name: userId
+      type: string
+      description: ID of the user.
+    - name: surface
+      type: enum<Surface>
+      description: Surface where the activity happened.
+    - name: buttonType
+      type: enum<ButtonType>
+      description: Type of the button clicked/tapped, associated to the "CLICK" events.
+    - name: event
+      type: enum<Event>
+      description: Type of the event.
+    - name: sessionId
+      type: string
+      description: ID of the session, everytime user reopen the app, it will be a new session.
+    - name: stringArray
+      type: array<string>
+      description: A list of strings as extra data for demo.
+    - name: intArray
+      type: array<int32>
+      description: A list of integers as extra data for demo.
+    - name: stringIntMap
+      type: map<string, int32>
+      description: A map from string to integers for demo.
+
+outputs:
+  - name: BQ
+    type: BigQuery
+    gcpProject: test_project
+    dataset: test_dataset
+    table: user_activities
+    key: /app/key.json

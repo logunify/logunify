@@ -1,0 +1,15 @@
+{{#timestamp}}
+setEventTime(java.lang.System.currentTimeMillis());
+{{/timestamp}}
+{{#installation_id}}
+setInstallationId(com.logunify.logging.android.Logger.getInstance().getInstallationID());
+{{/installation_id}}
+{{#version_code}}
+setAppVersionCode(com.logunify.logging.android.Logger.getInstance().getVersionCode());
+{{/version_code}}
+{{#version_name}}
+setAppVersionName(com.logunify.logging.android.Logger.getInstance().getVersionName());
+{{/version_name}}
+{{#platform}}
+setPlatform(\"Android\");
+{{/platform}}

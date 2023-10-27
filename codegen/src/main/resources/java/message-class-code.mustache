@@ -1,0 +1,17 @@
+private static String SCHEMA_NAME = "{{schemaName}}";
+private static String PROJECT_NAME = "{{projectName}}";
+
+@Override
+public String getSchemaName() {
+    return SCHEMA_NAME;
+}
+
+@Override
+public String getProjectName() {
+    return PROJECT_NAME;
+}
+
+@Override
+public String serialize() {
+    return android.util.Base64.encodeToString(toByteArray(), android.util.Base64.NO_WRAP);
+}

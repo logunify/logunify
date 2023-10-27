@@ -1,0 +1,25 @@
+dependencies {
+    implementation project(":common")
+
+    implementation 'commons-cli:commons-cli:1.5.0'
+    implementation 'com.github.spullara.mustache.java:compiler:0.9.10'
+    implementation 'org.apache.commons:commons-compress:1.22'
+    implementation 'commons-io:commons-io:2.11.0'
+}
+
+application {
+    mainClassName = "com.logunify.codegen.PackageBuilderMain"
+}
+
+task createExtraRunApp(type: CreateStartScripts) {
+    mainClassName = "com.logunify.codegen.ProtocPluginMain"
+    classpath = startScripts.classpath
+    outputDir = startScripts.outputDir
+    applicationName = 'protoc_plugin'
+}
+
+applicationDistribution.into("bin") {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from(createExtraRunApp)
+    fileMode = 0755
+}
